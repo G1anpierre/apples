@@ -1,0 +1,17 @@
+.card_link {
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+  .card {
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 500px 1fr;
+    row-gap: 15px;
+    text-decoration: none;
+
+    &__image_container {
+      position: relative;
+    }
+  }
+}
