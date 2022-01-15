@@ -1,31 +1,38 @@
 import React, {useState, useEffect} from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
+import {dehydrate, QueryClient, useQuery} from 'react-query'
 
-import Link from 'next/link'
-import styles from '../styles/Home.module.scss'
 import Header from '@components/Header/Header'
 
-export default function Home() {
-  const [state, setState] = useState<ProductType[]>([])
+const fetchProducts = async () => {
+  const response = await fetch(`http://localhost:3000/api/products`)
+  const data = await response.json()
+  return data
+}
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch('http://localhost:3000/api/products')
-      const data = await response.json()
-      setState(data)
-    }
+export async function getStaticProps() {
+  const products = await fetchProducts()
 
-    getProducts()
-  }, [])
+  return {
+    props: {
+      products,
+    },
+  }
+}
+
+export default function Home(props) {
+  const {data} = useQuery('products', fetchProducts, {
+    initialData: props.products,
+  })
 
   return (
     <div className="">
       <Header />
 
       <ProductList>
-        {state.map(product => (
-          <CardProduct {...product} />
+        {data?.map(product => (
+          <CardProduct {...product} key={product.id} />
         ))}
       </ProductList>
     </div>
