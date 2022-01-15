@@ -1,8 +1,9 @@
-import React from 'react'
-import Layout from '@components/Layout/Layout'
+import React, {useReducer} from 'react'
+import LayoutComponent from '@components/Layout/Layout'
 import 'antd/dist/antd.css'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
+import {AppContextProvider} from '../reducerContext/provider'
 
 function MyApp({Component, pageProps}) {
   const [queryClient] = React.useState(() => new QueryClient())
@@ -12,10 +13,12 @@ function MyApp({Component, pageProps}) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </Layout>
+      <AppContextProvider>
+        <LayoutComponent>
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </LayoutComponent>
+      </AppContextProvider>
     </QueryClientProvider>
   )
 }

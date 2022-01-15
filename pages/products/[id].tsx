@@ -1,6 +1,7 @@
 import React from 'react'
 import {useRouter} from 'next/router'
-import {Row, Col, Spin, Space, Descriptions, InputNumber, Button} from 'antd'
+import {Row, Col, Spin, Space, InputNumber, Button} from 'antd'
+import {useAppContext} from '../../reducerContext/provider'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -13,7 +14,8 @@ const fetchDetailProduct = async id => {
 }
 
 const ProductDetail = () => {
-  const [value, setValue] = React.useState<string | number>(1)
+  const [, dispatchContext] = useAppContext()
+  const [value, setValue] = React.useState(1)
   const router = useRouter()
   const {id} = router.query
 
@@ -23,8 +25,23 @@ const ProductDetail = () => {
 
   const {isLoading, isSuccess, isError, data} = detailProduct
 
-  const handleAddProduct = () => {
-    console.log('Success:', value)
+  const handleNumberOfProducts = (data, value) => {
+    const totalAdded = []
+    for (let i = 0; i < value; i++) {
+      totalAdded.push(data)
+    }
+    return totalAdded
+  }
+
+  const handleAddProduct = (data, value) => {
+    const total = handleNumberOfProducts(data, value)
+    console.log(total)
+
+    dispatchContext({type: 'updateCart', payload: total})
+  }
+
+  const onChange = value => {
+    setValue(value)
   }
 
   if (isLoading) {
@@ -70,9 +87,12 @@ const ProductDetail = () => {
                 min={1}
                 max={100}
                 value={value}
-                onChange={setValue}
+                onChange={onChange}
               />
-              <Button type="primary" onClick={handleAddProduct}>
+              <Button
+                type="primary"
+                onClick={() => handleAddProduct(data, value)}
+              >
                 Add Product to Cart
               </Button>
             </div>
