@@ -1,8 +1,6 @@
 import React from 'react'
 import Layout from '@components/Layout/Layout'
-import SSRProvider from 'react-bootstrap/SSRProvider'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/globals.css'
+import 'antd/dist/antd.css'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 
@@ -14,12 +12,10 @@ function MyApp({Component, pageProps}) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SSRProvider>
-        <Layout>
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </Layout>
-      </SSRProvider>
+      <Layout>
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Layout>
     </QueryClientProvider>
   )
 }

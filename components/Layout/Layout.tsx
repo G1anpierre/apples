@@ -1,23 +1,24 @@
 import React from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
+// import {Container, Row, Col} from 'react-bootstrap'
 
+import {Layout, Row, Col} from 'antd'
 import Footer from '../Footer/Footer'
 import Navbar from '@components/Navbar/Navbar'
 
-const Layout = ({children}) => {
+const LayoutComponent = ({children}) => {
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
+      <Layout>
+        <Row justify="center">
+          <Col span={20}>
             <Navbar />
             {children}
             <Footer />
           </Col>
         </Row>
-      </Container>
+      </Layout>
     </>
   )
 }
 
-export default Layout
+export default LayoutComponent

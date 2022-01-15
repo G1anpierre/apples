@@ -29,7 +29,6 @@ export default function Home(props) {
   return (
     <div className="">
       <Header />
-
       <ProductList>
         {data?.map(product => (
           <CardProduct {...product} key={product.id} />

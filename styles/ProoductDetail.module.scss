@@ -13,4 +13,21 @@
       margin-bottom: 15px;
     }
   }
+
+  &__add_product {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__description-grid {
+    height: 500px;
+    display: grid;
+  }
+}
+
+.spinner_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
