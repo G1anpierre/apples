@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
-import {dehydrate, QueryClient, useQuery} from 'react-query'
+import {useQuery} from 'react-query'
 
 import Header from '@components/Header/Header'
 

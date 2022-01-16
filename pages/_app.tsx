@@ -1,6 +1,7 @@
-import React, {useReducer} from 'react'
+import React from 'react'
 import LayoutComponent from '@components/Layout/Layout'
 import 'antd/dist/antd.css'
+// import '../styles/globals.css'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 import {AppContextProvider} from '../reducerContext/provider'

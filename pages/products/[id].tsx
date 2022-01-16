@@ -2,6 +2,7 @@ import React from 'react'
 import {useRouter} from 'next/router'
 import {Row, Col, Spin, Space, InputNumber, Button} from 'antd'
 import {useAppContext} from '../../reducerContext/provider'
+import {handleNumberOfProducts} from 'helpers/handleProducts'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -25,19 +26,10 @@ const ProductDetail = () => {
 
   const {isLoading, isSuccess, isError, data} = detailProduct
 
-  const handleNumberOfProducts = (data, value) => {
-    const totalAdded = []
-    for (let i = 0; i < value; i++) {
-      totalAdded.push(data)
-    }
-    return totalAdded
-  }
-
   const handleAddProduct = (data, value) => {
-    const total = handleNumberOfProducts(data, value)
-    console.log(total)
+    const totalProductsToAdd = handleNumberOfProducts(data, value)
 
-    dispatchContext({type: 'updateCart', payload: total})
+    dispatchContext({type: 'updateCart', payload: totalProductsToAdd})
   }
 
   const onChange = value => {

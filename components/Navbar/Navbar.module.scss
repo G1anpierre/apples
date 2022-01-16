@@ -25,3 +25,14 @@
     }
   }
 }
+
+.Drawer_custom {
+  :global(.ant-drawer-footer) {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  :global(.ant-drawer-title) {
+    text-align: right;
+  }
+}
