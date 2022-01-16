@@ -9,3 +9,12 @@ export const handleNumberOfProducts = (data, value) => {
   }
   return totalAdded
 }
+
+export const calcTotalAmount = products => {
+  const totalAmount = products.reduce((total, product) => {
+    total += Number(product.price)
+    return total
+  }, 0)
+
+  return totalAmount
+}

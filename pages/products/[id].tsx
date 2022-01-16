@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import {Row, Col, Spin, Space, InputNumber, Button} from 'antd'
 import {useAppContext} from '../../reducerContext/provider'
 import {handleNumberOfProducts} from 'helpers/handleProducts'
+import {updateCart} from '../../reducerContext/actions'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -29,7 +30,7 @@ const ProductDetail = () => {
   const handleAddProduct = (data, value) => {
     const totalProductsToAdd = handleNumberOfProducts(data, value)
 
-    dispatchContext({type: 'updateCart', payload: totalProductsToAdd})
+    updateCart(dispatchContext, totalProductsToAdd)
   }
 
   const onChange = value => {

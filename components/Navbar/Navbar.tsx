@@ -4,6 +4,8 @@ import style from './Navbar.module.scss'
 import {ShoppingCartOutlined} from '@ant-design/icons'
 import {useAppContext} from 'reducerContext/provider'
 import {Drawer, Button, Space, List, Skeleton, Avatar} from 'antd'
+import {deleteProduct} from '../../reducerContext/actions'
+import {calcTotalAmount} from 'helpers/handleProducts'
 
 const Navbar = () => {
   const [state, dispatchContext] = useAppContext()
@@ -14,16 +16,7 @@ const Navbar = () => {
   }
 
   const handleDeleteProduct = id => {
-    dispatchContext({type: 'deleteProduct', payload: id})
-  }
-
-  const calcTotalAmount = products => {
-    const totalAmount = products.reduce((total, product) => {
-      total += Number(product.price)
-      return total
-    }, 0)
-
-    return totalAmount
+    deleteProduct(dispatchContext, id)
   }
 
   const totalAmount = calcTotalAmount(state.cart)

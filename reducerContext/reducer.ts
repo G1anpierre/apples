@@ -1,11 +1,13 @@
+import {UPDATE_CART, DELETE_PRODUCT} from './actions'
+
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'updateCart':
+    case UPDATE_CART:
       return {
         ...state,
         cart: [...state.cart, ...action.payload],
       }
-    case 'deleteProduct':
+    case DELETE_PRODUCT:
       return {
         ...state,
         cart: state.cart.filter(
