@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 // import {Container, Row, Col} from 'react-bootstrap'
 
@@ -9,6 +10,9 @@ const LayoutComponent = ({children}) => {
   return (
     <>
       <Layout>
+        <Head>
+          <title>Apples App</title>
+        </Head>
         <Row justify="center">
           <Col span={20}>
             <Navbar />

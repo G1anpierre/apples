@@ -2,11 +2,11 @@
   margin-bottom: 40px;
   &__image_container {
     position: relative;
-    height: 500px;
+    min-height: 500px;
   }
 
   &__description {
-    height: 500px;
+    min-height: 500px;
     &__center {
       display: flex;
       justify-content: flex-start;
