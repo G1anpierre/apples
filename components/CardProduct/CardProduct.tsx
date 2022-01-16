@@ -14,7 +14,6 @@ const CardProduct = ({
     <Link href={`/products/${id}`}>
       <a className={style.card_link}>
         <div className={style.card}>
-          {/* <Card.Img variant="top" src={product_image} /> */}
           <div className={style.card__image_container}>
             <Image src={product_image} alt={product} layout="fill" />
           </div>

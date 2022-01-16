@@ -6,6 +6,7 @@ import {useAppContext} from 'reducerContext/provider'
 import {Drawer, Button, Space, List, Skeleton, Avatar} from 'antd'
 import {deleteProduct} from '../../reducerContext/actions'
 import {calcTotalAmount} from 'helpers/handleProducts'
+import Image from 'next/image'
 
 const Navbar = () => {
   const [state, dispatchContext] = useAppContext()
@@ -25,7 +26,13 @@ const Navbar = () => {
     <>
       <nav className={style.navbar}>
         <div className={style.navbar__topbar}>
-          <div className={style.navbar__topbar__logo}>Logo</div>
+          <div className={style.navbar__topbar__logo}>
+            <Image
+              src="/eaten-apple-logo-vector_f.png"
+              width="800"
+              height="275"
+            />
+          </div>
           <div
             className={style.navbar__topbar__shoppingCart}
             onClick={handleShowDrawer}

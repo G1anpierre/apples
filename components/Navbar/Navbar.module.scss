@@ -5,6 +5,10 @@
     justify-content: space-around;
     list-style: none;
 
+    a {
+      color: inherit;
+    }
+
     a:hover {
       text-decoration: underline;
       color: inherit;
@@ -19,6 +23,11 @@
   &__topbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+      max-width: 150px;
+    }
 
     &__shoppingCart {
       cursor: pointer;
