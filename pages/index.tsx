@@ -6,10 +6,12 @@ import {dehydrate, QueryClient, useQuery} from 'react-query'
 import Header from '@components/Header/Header'
 
 const fetchProducts = async () => {
-  const response = await fetch(`http://localhost:3000/api/products`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL}/api/products`)
   const data = await response.json()
   return data
 }
+
+// console.log('NEXT_PUBLIC_LOCAL :', process.env.NEXT_PUBLIC_LOCAL)
 
 export async function getStaticProps() {
   const products = await fetchProducts()
@@ -22,6 +24,9 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
+  const dev = process.env.NODE_ENV !== 'production'
+  console.log('DEV :', dev)
+
   const {data} = useQuery('products', fetchProducts, {
     initialData: props.products,
   })

@@ -10,7 +10,9 @@ import style from '../../styles/ProoductDetail.module.scss'
 import {useQuery} from 'react-query'
 
 const fetchDetailProduct = async id => {
-  const response = await fetch(`http://localhost:3000/api/products/${id}`)
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_LOCAL}/api/products/${id}`,
+  )
   const data = await response.json()
   return data
 }
