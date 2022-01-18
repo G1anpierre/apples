@@ -6,6 +6,7 @@ import {useAppContext} from 'reducerContext/provider'
 import {Drawer, Button, Space, List, Skeleton, Avatar} from 'antd'
 import {deleteProduct} from '../../reducerContext/actions'
 import {calcTotalAmount} from 'helpers/handleProducts'
+import ActiveLink from '@components/ActiveLink/ActiveLink'
 import Image from 'next/image'
 
 const Navbar = () => {
@@ -42,21 +43,15 @@ const Navbar = () => {
           </div>
         </div>
         <ul className={style.navbar__list}>
-          <Link href="/">
-            <a>
-              <li className={style.navbar__item}>Home</li>
-            </a>
-          </Link>
-          <Link href="/yesorno">
-            <a>
-              <li className={style.navbar__item}>Yes or No</li>
-            </a>
-          </Link>
-          <Link href="/about">
-            <a>
-              <li className={style.navbar__item}>About</li>
-            </a>
-          </Link>
+          <ActiveLink href="/">
+            <li className={style.navbar__item}>Home</li>
+          </ActiveLink>
+          <ActiveLink href="/yesorno">
+            <li className={style.navbar__item}>Yes or No</li>
+          </ActiveLink>
+          <ActiveLink href="/about">
+            <li className={style.navbar__item}>About</li>
+          </ActiveLink>
         </ul>
       </nav>
       <Drawer
