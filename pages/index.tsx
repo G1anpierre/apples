@@ -24,9 +24,6 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  const dev = process.env.NODE_ENV !== 'production'
-  console.log('DEV :', dev)
-
   const {data} = useQuery('products', fetchProducts, {
     initialData: props.products,
   })
