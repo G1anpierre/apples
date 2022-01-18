@@ -47,6 +47,11 @@ const Navbar = () => {
               <li className={style.navbar__item}>Home</li>
             </a>
           </Link>
+          <Link href="/yesorno">
+            <a>
+              <li className={style.navbar__item}>Yes or No</li>
+            </a>
+          </Link>
           <Link href="/about">
             <a>
               <li className={style.navbar__item}>About</li>
