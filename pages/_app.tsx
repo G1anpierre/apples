@@ -6,6 +6,12 @@ import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 import {AppContextProvider} from '../reducerContext/provider'
 
+export function reportWebVitals(metric) {
+  // analytics - calibre
+  console.log(metric)
+  // serverAnalitics(metric)
+}
+
 function MyApp({Component, pageProps}) {
   const [queryClient] = React.useState(() => new QueryClient())
   // Providers - Context/Providers, Theme, data
