@@ -1,7 +1,6 @@
 import {products} from '../../../database/data'
 
 export default function handler(req, res) {
-  console.log(req.query)
   const {id} = req.query
 
   const foundProduct = products.find(product => {

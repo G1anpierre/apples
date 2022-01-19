@@ -7,3 +7,7 @@ type ProductType = {
   price: string
   product_image: string
 }
+
+type InitialStateType = {
+  cart: ProductType[]
+}

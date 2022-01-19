@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Link from 'next/link'
 import style from './Navbar.module.scss'
 import {ShoppingCartOutlined} from '@ant-design/icons'
 import {useAppContext} from 'reducerContext/provider'

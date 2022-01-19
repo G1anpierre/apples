@@ -37,8 +37,6 @@ const YesOrNo = () => {
     getCalculation()
   }
 
-  console.log('state :', state)
-
   return (
     <div className={style.container}>
       <h1>Should I Eat an Apple today ? Yes or No</h1>

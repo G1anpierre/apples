@@ -1,6 +1,10 @@
 import {UPDATE_CART, DELETE_PRODUCT} from './actions'
 
-export const reducer = (state, action) => {
+type ActionType =
+  | {type: 'UPDATE_CART'; payload: ProductType[]}
+  | {type: 'DELETE_PRODUCT'; payload: string}
+
+export const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case UPDATE_CART:
       return {

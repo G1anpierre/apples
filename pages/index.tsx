@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
-import {dehydrate, QueryClient, useQuery} from 'react-query'
+import {useQuery} from 'react-query'
 
 import Header from '@components/Header/Header'
 
@@ -10,8 +10,6 @@ const fetchProducts = async () => {
   const data = await response.json()
   return data
 }
-
-// console.log('NEXT_PUBLIC_LOCAL :', process.env.NEXT_PUBLIC_LOCAL)
 
 export async function getStaticProps() {
   const products = await fetchProducts()
