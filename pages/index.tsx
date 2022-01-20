@@ -3,12 +3,16 @@ import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
 import {useQuery} from 'react-query'
 import {fetchProducts} from 'helpers/helperFetch'
+import {GetStaticProps, InferGetStaticPropsType} from 'next'
 
 import Header from '@components/Header/Header'
 
-export async function getStaticProps() {
+type HomeProductsType = {
+  products: ProductType[]
+}
+
+export const getStaticProps: GetStaticProps<HomeProductsType> = async () => {
   const products = await fetchProducts()
-  console.debug({products})
   return {
     props: {
       products,
@@ -16,9 +20,11 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home(props) {
+export default function Home({
+  products,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const {data} = useQuery('products', fetchProducts, {
-    initialData: props.products,
+    initialData: products,
   })
 
   return (

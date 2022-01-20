@@ -4,11 +4,18 @@ import {useAppContext} from '../../reducerContext/provider'
 import {handleNumberOfProducts} from 'helpers/handleProducts'
 import {updateCart} from '../../reducerContext/actions'
 import {fetchProducts, fetchDetailProduct} from 'helpers/helperFetch'
+import {GetStaticProps, InferGetStaticPropsType} from 'next'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
 
-export const getStaticProps = async ({params}) => {
+type DetailDataProps = {
+  detailData: ProductType
+}
+
+export const getStaticProps: GetStaticProps<DetailDataProps> = async ({
+  params,
+}) => {
   const {id} = params
   const detailData = await fetchDetailProduct(id)
 
@@ -32,7 +39,9 @@ export const getStaticPaths = async () => {
   }
 }
 
-const ProductDetail = ({detailData}) => {
+const ProductDetail = ({
+  detailData,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [, dispatchContext] = useAppContext()
   const [value, setValue] = React.useState(1)
 
