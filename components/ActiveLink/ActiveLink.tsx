@@ -1,6 +1,12 @@
 import {useRouter} from 'next/router'
 
-function ActiveLink({children, href}) {
+type ActiveLinkProps = {
+  children: React.ReactChild
+  href: string
+  prefetch?: boolean
+}
+
+function ActiveLink({children, href, prefetch}: ActiveLinkProps) {
   const router = useRouter()
   const style = {
     color: router.asPath === href ? 'red' : 'black',
@@ -9,6 +15,9 @@ function ActiveLink({children, href}) {
   const handleClick = e => {
     e.preventDefault()
     router.push(href)
+    if (prefetch) {
+      router.prefetch(href)
+    }
   }
 
   return (

@@ -42,13 +42,13 @@ const Navbar = () => {
           </div>
         </div>
         <ul className={style.navbar__list}>
-          <ActiveLink href="/">
+          <ActiveLink href="/" prefetch>
             <li className={style.navbar__item}>Home</li>
           </ActiveLink>
-          <ActiveLink href="/yesorno">
+          <ActiveLink href="/yesorno" prefetch>
             <li className={style.navbar__item}>Yes or No</li>
           </ActiveLink>
-          <ActiveLink href="/about">
+          <ActiveLink href="/about" prefetch>
             <li className={style.navbar__item}>About</li>
           </ActiveLink>
         </ul>
