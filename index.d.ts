@@ -5,7 +5,12 @@ type ProductType = {
   product: string
   description: string
   price: string
-  product_image: string
+  image: {
+    url: string
+  }
+  sys: {
+    id: string
+  }
 }
 
 type InitialStateType = {

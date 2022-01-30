@@ -3,8 +3,12 @@ import {Row, Col, Spin, Space, InputNumber, Button} from 'antd'
 import {useAppContext} from '../../reducerContext/provider'
 import {handleNumberOfProducts} from 'helpers/handleProducts'
 import {updateCart} from '../../reducerContext/actions'
-import {fetchProducts, fetchDetailProduct} from 'helpers/helperFetch'
-import {GetStaticProps, InferGetStaticPropsType} from 'next'
+// import {fetchProducts, fetchDetailProduct} from 'helpers/helperFetch'
+// import {GetStaticProps, InferGetStaticPropsType} from 'next'
+import {useRouter} from 'next/router'
+import {dehydrate, QueryClient, useQuery} from 'react-query'
+import getAllApples from '../../query/getAllProducts'
+import getSingleApple from '../../query/getSingleProduct'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -13,35 +17,41 @@ type DetailDataProps = {
   detailData: ProductType
 }
 
-export const getStaticProps: GetStaticProps<DetailDataProps> = async ({
-  params,
-}) => {
-  const {id} = params
-  const detailData = await fetchDetailProduct(id)
+export const getStaticProps = async context => {
+  const id = context.params.id
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery(['product', id], getSingleApple)
 
   return {
     props: {
-      detailData,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
 
 export const getStaticPaths = async () => {
-  const products = await fetchProducts()
-  const paths = products.map(product => ({
+  const data = await getAllApples()
+  const paths = data.map(product => ({
     params: {
-      id: product.id.toString(),
+      id: product.sys.id,
     },
   }))
+
   return {
     paths,
     fallback: false,
   }
 }
 
-const ProductDetail = ({
-  detailData,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const ProductDetail = () => {
+  const router = useRouter()
+  const {id} = router.query
+  console.log('id :', id)
+  const {
+    data: detailData,
+    isLoading,
+    isError,
+  } = useQuery(['product', id], getSingleApple)
   const [, dispatchContext] = useAppContext()
   const [value, setValue] = React.useState(1)
 
@@ -55,13 +65,23 @@ const ProductDetail = ({
     setValue(value)
   }
 
+  if (isError) {
+    return <div>Error</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  console.log('detailData :', detailData)
+
   return (
     <div className={style.detail}>
       <Row justify="center" gutter={[48, 16]}>
         <Col xs={{span: 20}} md={{span: 10}}>
           <div className={style.detail__image_container}>
             <Image
-              src={detailData.product_image}
+              src={detailData.image.url}
               alt={detailData.product}
               layout="fill"
             />
