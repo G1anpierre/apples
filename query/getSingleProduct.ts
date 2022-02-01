@@ -4,22 +4,21 @@ import graphQLClient from './index'
 const getSingleApple = async ({queryKey}) => {
   const query = gql`
     {
-      query getApples($id: id) {
-        apples(id: $id) {
-          product
-          description
-          price
-          sku
-          image {
-            url
-          }
+      apples(id: id) {
+        product
+        description
+        price
+        sku
+        image {
+          url
         }
       }
     }
   `
   const [, id] = queryKey
+  console.log('id Query key', id)
   const variables = {
-    id: id,
+    id,
   }
   console.log('id passed: ', queryKey)
   const response = await graphQLClient.request(query, variables)
