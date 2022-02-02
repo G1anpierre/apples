@@ -3,8 +3,8 @@ import {Row, Col, Spin, Space, InputNumber, Button} from 'antd'
 import {useAppContext} from '../../reducerContext/provider'
 import {handleNumberOfProducts} from 'helpers/handleProducts'
 import {updateCart} from '../../reducerContext/actions'
-import {fetchProducts, fetchDetailProduct} from 'helpers/helperFetch'
 import {GetStaticProps, InferGetStaticPropsType} from 'next'
+import {getAllPosts, getPostBySlug} from '../../utils/contentful'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<DetailDataProps> = async ({
   params,
 }) => {
   const {id} = params
-  const detailData = await fetchDetailProduct(id)
+  const detailData = await getPostBySlug(id)
 
   return {
     props: {
@@ -27,10 +27,10 @@ export const getStaticProps: GetStaticProps<DetailDataProps> = async ({
 }
 
 export const getStaticPaths = async () => {
-  const products = await fetchProducts()
+  const products = await getAllPosts()
   const paths = products.map(product => ({
     params: {
-      id: product.id.toString(),
+      id: product.sku.toString(),
     },
   }))
   return {
@@ -61,7 +61,7 @@ const ProductDetail = ({
         <Col xs={{span: 20}} md={{span: 10}}>
           <div className={style.detail__image_container}>
             <Image
-              src={detailData.product_image}
+              src={detailData.image.url}
               alt={detailData.product}
               layout="fill"
             />

@@ -8,14 +8,15 @@ const CardProduct = ({
   product,
   price,
   description,
-  product_image,
+  image,
+  sku,
 }: ProductType) => {
   return (
-    <Link href={`/products/${id}`}>
+    <Link href={`/products/${sku}`}>
       <a className={style.card_link}>
         <div className={style.card}>
           <div className={style.card__image_container}>
-            <Image src={product_image} alt={product} layout="fill" />
+            <Image src={image.url} alt={product} layout="fill" />
           </div>
           <div className="card-body">
             <h3 className="card-body__title">{product}</h3>

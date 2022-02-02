@@ -88,7 +88,7 @@ const Navbar = () => {
             >
               <Skeleton avatar title={false} loading={false} active>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.product_image} />}
+                  avatar={<Avatar src={item.image.url} />}
                   title={<a href="https://ant.design">{item.product}</a>}
                   // description={item.description}
                 />
