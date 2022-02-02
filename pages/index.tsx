@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps<HomeProductsType> = async () => {
     props: {
       products,
     },
+    revalidate: 60,
   }
 }
 
@@ -27,8 +28,6 @@ export default function Home({
   const {data} = useQuery('products', getAllPosts, {
     initialData: products,
   })
-
-  console.log('data :', data)
 
   return (
     <div>
