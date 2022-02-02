@@ -29,6 +29,8 @@ export default function Home() {
   // const {data} = useQuery<GraphQLResponse, Error>('products', getAllApples)
   const {data} = useGetAllProductsQuery<GraphQLResponse>(graphQLClient)
 
+  console.log('data :', data)
+
   return (
     <div>
       <Header />
