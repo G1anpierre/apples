@@ -34,7 +34,7 @@ export default function Home({
       <Header />
       <ProductList>
         {data?.map(product => (
-          <CardProduct {...product} key={product.id} />
+          <CardProduct {...product} key={product.sku} />
         ))}
       </ProductList>
     </div>
