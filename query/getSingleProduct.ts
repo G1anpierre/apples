@@ -15,7 +15,6 @@ const getSingleApple = async queryKey => {
       }
     }
   `
-  console.log('id Query key', queryKey)
   const variables = {
     id: queryKey,
   }
