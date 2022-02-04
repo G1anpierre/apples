@@ -2,7 +2,7 @@ import React from 'react'
 import LayoutComponent from '@components/Layout/Layout'
 import 'antd/dist/antd.css'
 // import '../styles/globals.css'
-import {QueryClient, QueryClientProvider} from 'react-query'
+import {Hydrate, QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 import {AppContextProvider} from '../reducerContext/provider'
 
@@ -20,12 +20,14 @@ function MyApp({Component, pageProps}) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContextProvider>
-        <LayoutComponent>
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </LayoutComponent>
-      </AppContextProvider>
+      <Hydrate state={pageProps.dehydratedState}>
+        <AppContextProvider>
+          <LayoutComponent>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </LayoutComponent>
+        </AppContextProvider>
+      </Hydrate>
     </QueryClientProvider>
   )
 }

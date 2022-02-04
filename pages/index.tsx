@@ -1,38 +1,37 @@
 import React from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
-import {useQuery} from 'react-query'
-import {fetchProducts} from 'helpers/helperFetch'
+import {dehydrate, QueryClient, useQuery} from 'react-query'
+// import {fetchProducts} from 'helpers/helperFetch'
+import getAllApples from '../query/getAllProducts'
 import {GetStaticProps, InferGetStaticPropsType} from 'next'
 
 import Header from '@components/Header/Header'
 
 type HomeProductsType = {
-  products: ProductType[]
+  queryClient: ProductType[]
 }
 
-export const getStaticProps: GetStaticProps<HomeProductsType> = async () => {
-  const products = await fetchProducts()
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery('products', getAllApples)
+
   return {
     props: {
-      products,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
 
-export default function Home({
-  products,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const {data} = useQuery('products', fetchProducts, {
-    initialData: products,
-  })
+export default function Home() {
+  const {data} = useQuery('products', getAllApples)
 
   return (
     <div>
       <Header />
       <ProductList>
         {data?.map(product => (
-          <CardProduct {...product} key={product.id} />
+          <CardProduct {...product} key={product.sys.id} />
         ))}
       </ProductList>
     </div>
