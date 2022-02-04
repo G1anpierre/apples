@@ -12,15 +12,16 @@ import getSingleApple from '../../query/getSingleProduct'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
+import {GetStaticPaths, GetStaticProps} from 'next'
 
 type DetailDataProps = {
   detailData: ProductType
 }
 
-export const getStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
   const id = context.params.id
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['product', id], getSingleApple)
+  await queryClient.prefetchQuery(['product', id], () => getSingleApple(id))
 
   return {
     props: {
@@ -29,7 +30,8 @@ export const getStaticProps = async context => {
   }
 }
 
-export const getStaticPaths = async () => {
+// This is renerated on build time
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = await getAllApples()
   const paths = data.map(product => ({
     params: {
@@ -43,6 +45,15 @@ export const getStaticPaths = async () => {
   }
 }
 
+// This is regenerated on demand server side the first time only
+// than is cashed
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [],
+//     fallback: 'blocking',
+//   }
+// }
+
 const ProductDetail = () => {
   const router = useRouter()
   const {id} = router.query
@@ -51,7 +62,7 @@ const ProductDetail = () => {
     data: detailData,
     isLoading,
     isError,
-  } = useQuery(['product', id], getSingleApple)
+  } = useQuery(['product', id], () => getSingleApple(id))
   const [, dispatchContext] = useAppContext()
   const [value, setValue] = React.useState(1)
 
@@ -72,8 +83,6 @@ const ProductDetail = () => {
   if (isLoading) {
     return <div>Loading...</div>
   }
-
-  console.log('detailData :', detailData)
 
   return (
     <div className={style.detail}>

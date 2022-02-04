@@ -4,7 +4,6 @@ import Image from 'next/image'
 import style from './CardProduct.module.scss'
 
 const CardProduct = ({
-  sku,
   product,
   price,
   description,

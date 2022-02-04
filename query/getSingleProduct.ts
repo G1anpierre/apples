@@ -1,10 +1,10 @@
 import {gql} from 'graphql-request'
 import graphQLClient from './index'
 
-const getSingleApple = async ({queryKey}) => {
+const getSingleApple = async queryKey => {
   const query = gql`
-    {
-      apples(id: id) {
+    query getSingleProduct($id: String!) {
+      apples(id: $id) {
         product
         description
         price
@@ -15,15 +15,12 @@ const getSingleApple = async ({queryKey}) => {
       }
     }
   `
-  const [, id] = queryKey
-  console.log('id Query key', id)
+  console.log('id Query key', queryKey)
   const variables = {
-    id,
+    id: queryKey,
   }
-  console.log('id passed: ', queryKey)
   const response = await graphQLClient.request(query, variables)
   const data = JSON.parse(JSON.stringify(response))
-  console.log('data form getProduct :', data.apples)
   return data.apples
 }
 
