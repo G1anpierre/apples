@@ -1,6 +1,20 @@
 import {gql} from 'graphql-request'
 import graphQLClient from './index'
 
+const GET_SINGLE_PRODUCT = gql`
+  query getSingleProduct($id: String!) {
+    apples(id: $id) {
+      product
+      description
+      price
+      sku
+      image {
+        url
+      }
+    }
+  }
+`
+
 const getSingleApple = async queryKey => {
   const query = gql`
     query getSingleProduct($id: String!) {

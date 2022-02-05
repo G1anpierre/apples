@@ -1,18 +1,18 @@
 type ProductType = {
-  id: number
-  sku: string
-  uniqueIdProduct: string
-  product: string
-  description: string
-  price: string
-  image: {
-    url: string
+  sku?: string
+  product?: string
+  description?: string
+  price?: number
+  image?: {
+    url?: string
   }
   sys: {
     id: string
   }
 }
 
+type ListItem = ProductType & {uniqueIdProduct: string}
+
 type InitialStateType = {
-  cart: ProductType[]
+  cart: ListItem[]
 }

@@ -74,7 +74,7 @@ const Navbar = () => {
           itemLayout="horizontal"
           // loadMore={loadMore}
           dataSource={state.cart}
-          renderItem={(item: ProductType) => (
+          renderItem={(item: ListItem) => (
             <List.Item
               actions={[
                 <a

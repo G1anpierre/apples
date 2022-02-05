@@ -9,6 +9,8 @@ import {useRouter} from 'next/router'
 import {dehydrate, QueryClient, useQuery} from 'react-query'
 import getAllApples from '../../query/getAllProducts'
 import getSingleApple from '../../query/getSingleProduct'
+import {useGetSingleProductQuery} from 'pages/api/generated/graphql'
+import graphQLClient from 'query'
 
 import Image from 'next/image'
 import style from '../../styles/ProoductDetail.module.scss'
@@ -57,12 +59,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const ProductDetail = () => {
   const router = useRouter()
   const {id} = router.query
-  console.log('id :', id)
-  const {
-    data: detailData,
-    isLoading,
-    isError,
-  } = useQuery(['product', id], () => getSingleApple(id))
+  const {data, isLoading, isError} = useGetSingleProductQuery(graphQLClient, {
+    id,
+  } as {id: string})
   const [, dispatchContext] = useAppContext()
   const [value, setValue] = React.useState(1)
 
@@ -84,34 +83,32 @@ const ProductDetail = () => {
     return <div>Loading...</div>
   }
 
+  const {apples} = data
+
   return (
     <div className={style.detail}>
       <Row justify="center" gutter={[48, 16]}>
         <Col xs={{span: 20}} md={{span: 10}}>
           <div className={style.detail__image_container}>
-            <Image
-              src={detailData.image.url}
-              alt={detailData.product}
-              layout="fill"
-            />
+            <Image src={apples.image.url} alt={apples.product} layout="fill" />
           </div>
         </Col>
         <Col xs={{span: 20}} md={{span: 10}}>
           <div className={style.detail__description}>
             <Row gutter={[16, 16]}>
               <Col span={12}>Product Name:</Col>
-              <Col span={12}>{detailData?.product}</Col>
+              <Col span={12}>{apples?.product}</Col>
               <Col span={12}>Product Description:</Col>
-              <Col span={12}>{detailData?.description}</Col>
+              <Col span={12}>{apples?.description}</Col>
               <Col span={12}>Price:</Col>
-              <Col span={12}>{detailData?.price} $</Col>
+              <Col span={12}>{apples?.price} $</Col>
             </Row>
           </div>
           <div className={style.detail__add_product}>
             <InputNumber min={1} max={100} value={value} onChange={onChange} />
             <Button
               type="primary"
-              onClick={() => handleAddProduct(detailData, value)}
+              onClick={() => handleAddProduct(apples, value)}
             >
               Add Product to Cart
             </Button>

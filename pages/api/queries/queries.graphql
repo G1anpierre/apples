@@ -1,0 +1,28 @@
+query getAllProducts {
+  applesCollection {
+    items {
+      sku
+      product
+      description
+      price
+      image {
+        url
+      }
+      sys {
+        id
+      }
+    }
+  }
+}
+
+query getSingleProduct($id: String!) {
+  apples(id: $id) {
+    product
+    description
+    price
+    sku
+    image {
+      url
+    }
+  }
+}

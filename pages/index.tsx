@@ -1,12 +1,14 @@
 import React from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
-import {dehydrate, QueryClient, useQuery} from 'react-query'
-// import {fetchProducts} from 'helpers/helperFetch'
+import {dehydrate, QueryClient} from 'react-query'
+import {useGetAllProductsQuery} from 'pages/api/generated/graphql'
 import getAllApples from '../query/getAllProducts'
-import {GetStaticProps, InferGetStaticPropsType} from 'next'
+import {GetStaticProps} from 'next'
 
 import Header from '@components/Header/Header'
+import {GraphQLResponse} from 'graphql-request/dist/types'
+import graphQLClient from 'query'
 
 type HomeProductsType = {
   queryClient: ProductType[]
@@ -24,13 +26,14 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function Home() {
-  const {data} = useQuery('products', getAllApples)
+  // const {data} = useQuery<GraphQLResponse, Error>('products', getAllApples)
+  const {data} = useGetAllProductsQuery<GraphQLResponse>(graphQLClient)
 
   return (
     <div>
       <Header />
       <ProductList>
-        {data?.map(product => (
+        {data?.applesCollection?.items?.map(product => (
           <CardProduct {...product} key={product.sys.id} />
         ))}
       </ProductList>
