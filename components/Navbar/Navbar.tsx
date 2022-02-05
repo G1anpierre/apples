@@ -8,6 +8,8 @@ import {calcTotalAmount} from 'helpers/handleProducts'
 import ActiveLink from '@components/ActiveLink/ActiveLink'
 import Image from 'next/image'
 
+type ListItem = ProductType & {uniqueIdProduct: string}
+
 const Navbar = () => {
   const [state, dispatchContext] = useAppContext()
   const [visible, setVisible] = useState(false)
@@ -74,7 +76,7 @@ const Navbar = () => {
           itemLayout="horizontal"
           // loadMore={loadMore}
           dataSource={state.cart}
-          renderItem={(item: ProductType) => (
+          renderItem={(item: ListItem) => (
             <List.Item
               actions={[
                 <a

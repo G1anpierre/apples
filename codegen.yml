@@ -1,0 +1,14 @@
+schema:
+  - 'https://graphql.contentful.com/content/v1/spaces/wmen7hpcu8o1':
+      headers:
+        Authorization: 'Bearer rkHLqYx0EMqFUW6RwPUH5w7rkcpS-KKXVDXn1VPRfEI'
+documents:
+  - './api/**/*.graphql'
+generates:
+  './api/generated/graphql.ts':
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-query'
+    config:
+      fetcher: graphql-request
