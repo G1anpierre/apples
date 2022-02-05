@@ -1,7 +1,7 @@
 import {UPDATE_CART, DELETE_PRODUCT} from './actions'
 
 type ActionType =
-  | {type: 'UPDATE_CART'; payload: ProductType[]}
+  | {type: 'UPDATE_CART'; payload: ListItem[]}
   | {type: 'DELETE_PRODUCT'; payload: string}
 
 export const reducer = (state: InitialStateType, action: ActionType) => {

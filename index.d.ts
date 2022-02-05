@@ -11,6 +11,8 @@ type ProductType = {
   }
 }
 
+type ListItem = ProductType & {uniqueIdProduct: string}
+
 type InitialStateType = {
-  cart: ProductType[]
+  cart: ListItem[]
 }
