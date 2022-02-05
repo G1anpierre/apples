@@ -1,11 +1,10 @@
 import React from 'react'
 import ProductList from '@components/ProductList/ProductList'
 import CardProduct from '@components/CardProduct/CardProduct'
-import {dehydrate, QueryClient, useQuery} from 'react-query'
-import {useGetAllProductsQuery} from 'api/generated/graphql'
-// import {fetchProducts} from 'helpers/helperFetch'
+import {dehydrate, QueryClient} from 'react-query'
+import {useGetAllProductsQuery} from 'pages/api/generated/graphql'
 import getAllApples from '../query/getAllProducts'
-import {GetStaticProps, InferGetStaticPropsType} from 'next'
+import {GetStaticProps} from 'next'
 
 import Header from '@components/Header/Header'
 import {GraphQLResponse} from 'graphql-request/dist/types'
@@ -28,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home() {
   // const {data} = useQuery<GraphQLResponse, Error>('products', getAllApples)
-  const {data} = useGetAllProductsQuery(graphQLClient)
+  const {data} = useGetAllProductsQuery<GraphQLResponse>(graphQLClient)
 
   return (
     <div>

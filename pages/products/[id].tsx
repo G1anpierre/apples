@@ -9,7 +9,7 @@ import {useRouter} from 'next/router'
 import {dehydrate, QueryClient, useQuery} from 'react-query'
 import getAllApples from '../../query/getAllProducts'
 import getSingleApple from '../../query/getSingleProduct'
-import {useGetSingleProductQuery} from 'api/generated/graphql'
+import {useGetSingleProductQuery} from 'pages/api/generated/graphql'
 import graphQLClient from 'query'
 
 import Image from 'next/image'
