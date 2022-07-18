@@ -3,7 +3,7 @@ import {InstagramFeed} from '@components/InstagramFeed/InstagramFeed'
 const About = () => {
   return (
     <div>
-      <h3>About</h3>
+      <h3>Gianpierre W. Fernandez</h3>
       <InstagramFeed />
     </div>
   )
