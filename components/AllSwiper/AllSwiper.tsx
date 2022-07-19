@@ -1,6 +1,6 @@
 import React from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import {Navigation, Pagination, EffectFade} from 'swiper'
+import {Pagination, EffectFade} from 'swiper'
 import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -68,7 +68,7 @@ export const AllSwiper = ({feeds}) => {
       <h3>InstagramFeed @gianpitri</h3>
       <div className="swiper-container">
         <Swiper
-          modules={[Navigation, Pagination, EffectFade]}
+          modules={[Pagination, EffectFade]}
           spaceBetween={50}
           slidesPerView={1}
           breakpoints={{
@@ -85,7 +85,6 @@ export const AllSwiper = ({feeds}) => {
               spaceBetween: 50,
             },
           }}
-          navigation
           pagination={{clickable: true}}
           onSlideChange={() => console.log('slide change')}
           onSwiper={swiper => console.log(swiper)}
