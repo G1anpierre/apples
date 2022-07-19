@@ -2,6 +2,7 @@ import React from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Pagination, EffectFade} from 'swiper'
 import Image from 'next/image'
+import ReactPlayer from 'react-player'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -28,21 +29,31 @@ export const AllSwiper = ({feeds}) => {
         return (
           <>
             <div className="video-container">
-              <iframe src={feed.media_url} className="iframe" frameBorder={0} />
+              <ReactPlayer
+                url={feed.media_url}
+                width="100%"
+                height="100%"
+                controls
+                className="react-player"
+                config={{
+                  facebook: {
+                    appId: `${process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID}`,
+                  },
+                }}
+              />
             </div>
             <style jsx>{`
               .video-container {
+                background-color: black;
                 position: relative;
-                padding-bottom: 177%; /* 16:9 */
+                padding-bottom: 177.77%; /* 16:9 */
                 height: 0;
               }
 
-              .iframe {
+              :global(.react-player) {
+                overflow: hidden;
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                inset: 0;
               }
             `}</style>
           </>
