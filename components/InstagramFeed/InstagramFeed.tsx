@@ -1,11 +1,25 @@
 import {AllSwiper} from '@components/AllSwiper/AllSwiper'
-import {useInstagram} from 'hooks/instagram'
+import {getInstagramPosts} from 'helpers/helperFetch'
 import {useQuery} from 'react-query'
 
-export const InstagramFeed = ({data}) => {
-  return (
-    <>
-      <AllSwiper feeds={data} />
-    </>
+export const InstagramFeed = () => {
+  const {isSuccess, data, isLoading, isError} = useQuery('instagram', () =>
+    getInstagramPosts(),
   )
+
+  if (isLoading) {
+    return <div>...loading</div>
+  }
+
+  if (isError) {
+    return <div>Error</div>
+  }
+
+  if (isSuccess) {
+    return (
+      <>
+        <AllSwiper feeds={data} />
+      </>
+    )
+  }
 }
